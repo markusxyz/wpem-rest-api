@@ -473,6 +473,9 @@ class WPEM_REST_Events_Controller extends WPEM_REST_CRUD_Controller
                 if(!$form_submit_event_instance->get_event_id() ) {
 
                     $validation_errors =  $form_submit_event_instance->get_errors();
+		    if (isset($validation_errors)) {
+			return new WP_Error(var_dump($validation_errors), 'validation_error', array( 'status' => 400 ));
+		    }
                     foreach ( $validation_errors as $error ) {
                         echo  esc_html__($error);
                     }
